@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
     <meta name="description" content=" ">
     <title><?= $titre ?></title>
 </head>
 <body>
     <div>
         <nav>
-             <a href="?action=listFilms">Liste des films</a> <a href="index.php?action=listActors">Liste des acteurs</a><a href=""></a><a href=""></a><a href=""></a>
+             <a href="?action=listFilms">Films</a>
+             <a href="index.php?action=listActors">Acteurs</a>
+             <a href="index.php?action=listGenre">Genres</a>
+             <a href="index.php?action=listReal">Réalisateurs</a>
+             <a href=""></a>
         </nav>
         <main>
             <div id="contenu">
@@ -19,6 +23,9 @@
                 <?= $contenu ?>
             </div> 
         </main>
+        <footer>
+            
+        </footer>
     </div>
 </body>
 </html>

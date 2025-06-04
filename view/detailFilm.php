@@ -1,9 +1,6 @@
 <?php ob_start(); ?>
-
-<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount() ?> films</p>
-
 <?php 
-$film = $requete->fetch(); 
+$film = $requete->fetch();
 ?>
 
 <table class="uk-table uk-table-striped">
@@ -15,6 +12,7 @@ $film = $requete->fetch();
             <th>REALISATEUR</th>
             <th>NOTE</th>
             <th>SYSNOPSIS</th>
+            <th>CASTING</th>
         </tr>
     </thead>
     <tbody>
@@ -25,15 +23,20 @@ $film = $requete->fetch();
             <td><?= $film["nom"] ?></td>
             <td><?= $film["note"] ?></td>
             <td><?= $film["synopsis"] ?></td>
+            <td>
+                <?php foreach($requete1->fetchAll() as $cast) { ?>
+                    <div>
+                        <a href="index.php?action=detailActor&id=<?=$cast["id_acteur"]?>"><?= $cast["Acteur"]?></a>
+                    </div>
+                <?php } ?>
+            </td>
         </tr>
     </tbody>
 </table>
 
 <?php
-
 $titre = $film["titre"];
 $titre_secondaire = $film["titre"];
 $contenu = ob_get_clean();
 require "view/template.php";
-
 ?>

@@ -198,7 +198,7 @@ padding-top: 10em;}
     .imgactu2{
         width: 90%;
     }
-}
+} 
 .containerimgactu3{
     width: 50%;
     .imgactu3{
@@ -211,12 +211,30 @@ padding-top: 10em;}
     width: 50%;
     text-align: center;
     .h3actu{
-        font-size: 4em;
+        font-size: 6em;
     }
     .pActu{
-        font-size: 2em;
+        font-size: m;
         text-align: center;
-        padding : 0 10em;
+        padding : 0 4em;
         padding-top: 1.5em;
     }
+}
+
+.contentfilms{
+    width: 80%;
+    background-color: rgb(51, 51, 94);
+    background: opacity 0.5;
+}
+
+.contenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.actuellement{
+    display: flex;
 }

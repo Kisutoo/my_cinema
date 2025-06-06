@@ -25,7 +25,7 @@
              <a href="index.php?action=listReal">Réalisateurs</a>
         </nav>
         <main>
-            <div id="contenu">
+            <div class="contenu">
 
                 <h2 class="commonH2"><?= $titre_secondaire ?></h2>
                 <?= $contenu ?>

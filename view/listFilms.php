@@ -1,24 +1,19 @@
 <?php ob_start(); ?>
 
-<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount() ?> films</p>
-
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-            foreach($requete->fetchAll() as $film) { ?> 
-                <tr>
-                    <td><a href="index.php?action=detailFilm&id=<?=$film["id_film"]?>"><?= $film["titre"] ?></a></td>
-                    <td><?= $film["anneeDeSortie"] ?></td>
-                </tr>
+        
+<div class="contentfilms">
+    <div class="actuellement">
+        <?php foreach($requete->fetchAll() as $filmActuels) { ?> 
+                <div class="film">
+                    <a class="lienfilm" href="index.php?action=detailFilm&id=<?=$filmActuels["id_film"]?>">
+                        <img src="public/img/affiches/<?=$filmActuels["affiche"]?>" alt="<?=$filmActuels["descAffiche"]?>">
+                        <h3 class="titrefilm"><?=$filmActuels["titre"]?></h3>
+                    </a>
+                </div>
         <?php } ?>
-    </tbody>
-</table>
+    </div>
+</div>
+
 
 <?php
 $titre = "Films à l'affiche";

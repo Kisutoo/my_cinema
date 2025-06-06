@@ -1,13 +1,68 @@
 *{
-    padding : 0;
-    margin : 0;
-    vertical-align: bottom;
-    color: white;
-    background-color: aqua;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    font-family: "Lunasima";
+}
+
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    font-weight: bold;
+    font-size: 2em;
+}
+body{
+    background-image: url(../img/6484259.jpg);
+
+}
+
+main{
+    height: 800em;
 }
 
 a{
-    color: white;
     text-decoration: none;
+    color: white;
+}
+footer{
+    background-color: black;
+}
+.logocine{
+    width: 50%;
+    transform: rotate(-65deg);
+    text-align: center;
+    justify-content: center;
+    padding-top: 3.5em;
+    padding-left: 0.5em;
+
 }
 
+.lienlogo{
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    
+}
+.txtlogo{
+    font-size: 1em;
+    padding-top: 0.8em;
+    text-align: center;
+}
+
+.loupe{
+    padding-right: 1em;
+}
+
+.commonH2{
+    text-align: center;
+    font-size: 4.5em;
+    letter-spacing: 25px;
+    padding-top: 1.5em;
+}
+
+footer{
+    height: 20em;
+    background-color: rgb(30,26,26);
+}

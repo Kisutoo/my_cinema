@@ -1,0 +1,32 @@
+
+<svg width="240" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="ticket-mask">
+      <!-- Fond visible -->
+      <rect x="0" y="0" width="240" height="100" fill="white" />
+      
+      <!-- Trous circulaires -->
+      <circle cx="0" cy="50" r="18" fill="black" />
+      <circle cx="240" cy="50" r="18" fill="black" />
+      
+      <!-- Étoile centrée, tournée de 20°, et agrandie -->
+      <g transform="translate(120,50) rotate(20) scale(1.5)">
+        <path d="M0,-15 
+                 L4,-4 
+                 L15,-4 
+                 L6,2 
+                 L9,13 
+                 L0,7 
+                 L-9,13 
+                 L-6,2 
+                 L-15,-4 
+                 L-4,-4 
+                 Z"
+              fill="black" />
+      </g>
+    </mask>
+  </defs>
+
+  <!-- Rectangle principal avec les découpes -->
+  <rect x="0" y="0" width="240" height="100" fill="white" mask="url(#ticket-mask)" />
+</svg>

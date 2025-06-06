@@ -5,9 +5,6 @@ use Model\Connect;
 
 class CinemaController {
 
-    /**
-     * Lister les films
-     */
     public function listFilms() {
 
         $pdo = Connect::seConnecter();
@@ -16,7 +13,7 @@ class CinemaController {
             FROM film
         ");
     
-        require "view/listFilms.php";
+        require "./view/listFilms.php";
     }
 
     public function listActors() {
@@ -112,5 +109,10 @@ class CinemaController {
         ");
         $requete->execute(["id_realisateur" => $id]);
         require "view/detailReal.php";
+    }
+
+    public function main() {
+    
+        require "view/main.php";
     }
 }

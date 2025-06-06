@@ -21,8 +21,8 @@
 </table>
 
 <?php
-$titre = "Liste des films";
-$titre_secondaire = "Liste des films";
+$titre = "Films à l'affiche";
+$titre_secondaire = "Films à l'affiche";
 $contenu = ob_get_clean();
 require "view/template.php";
 ?>

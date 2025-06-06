@@ -13,9 +13,9 @@
 <body>
     <div>
         <nav>
-            <div> 
-                <a class="loupe" href="#"><img src="">dd</a>
-                <a href="index.php?action=listFilms">Films</a>
+            <div class="nav1"> 
+                <a class="loupe" href="#"><img class="imgloupe" src="public/img/loupe.png" alt="Loupe de recherche"></a>
+                <a class="lienfilm" href="index.php?action=listFilms">Films</a>
             </div>
             <a href="index.php?action=listGenre">Genres</a>
             <a class="lienlogo" href="index.php?action=main"><img class="logocine" src="./public/img/ticket_cinema.svg" alt="Logo Ticket de cinéma">

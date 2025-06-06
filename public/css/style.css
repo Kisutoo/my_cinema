@@ -3,6 +3,7 @@
     margin: 0;
     vertical-align: top;
     font-family: "Lunasima";
+    color: white;
 }
 
 
@@ -12,6 +13,10 @@ nav{
     padding: 1em;
     font-weight: bold;
     font-size: 2em;
+}
+
+.lienfilm{
+    width: 2%;
 }
 body{
     background-image: url(../img/6484259.jpg);
@@ -25,6 +30,10 @@ main{
 a{
     text-decoration: none;
     color: white;
+}
+.nav1{
+    display: flex;
+    width: 10%;
 }
 
 .logocine{
@@ -51,8 +60,12 @@ a{
 
 .loupe{
     padding-right: 1em;
+    width: 40%;
 }
 
+.imgloupe{
+    width: 50%;
+}
 .commonH2{
     color : white;
     text-align: center;
@@ -70,14 +83,8 @@ footer{
 }
 
 .h2main{
-    color: white;
-    text-align: center;
-    font-size: 4em;
-    padding-top: 15em;
+    margin-top: -8em;
 }
-
-
-
 
 .custom-slider { display: none; }
 .slide-container {
@@ -115,7 +122,7 @@ footer{
 }
 .slide-dot{ 
     text-align: center; 
-    margin: -50em;
+    transform: translate(0, -50em);
 }
 .dot {
     cursor: pointer;
@@ -146,4 +153,44 @@ footer{
 .bannertotal{
     display: flex;
     flex-direction: column;
+}
+
+.actu{
+    display: flex;
+    padding : 10em 0;
+    justify-content: center;
+    align-items: center;
+}
+.containerimgactu{
+    width: 50%;
+}
+.imgactu{
+    border-radius: 10%;
+}
+.containerimgactu2{
+    width: 50%;
+    .imgactu2{
+        width: 100%;
+    }
+}
+.containerimgactu3{
+    width: 50%;
+    .imgactu3{
+        width: 200%;
+    }
+}
+.actu3{
+}
+.txtActu{
+    width: 50%;
+    text-align: center;
+    .h3actu{
+        font-size: 4em;
+    }
+    .pActu{
+        font-size: 2em;
+        text-align: center;
+        padding : 0 10em;
+        padding-top: 1.5em;
+    }
 }

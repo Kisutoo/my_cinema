@@ -26,7 +26,7 @@
 </div>
 <h2 class="h2main commonH2">Actualités</h2>
 <div class="actu">
-    <div class="containterimgactu">
+    <div class="containerimgactu">
         <a href="#"><img class="imgactu" src="public/img/écrancinema.jpg" alt="Salle de cinéma"></a>
     </div>    
     <div class="txtActu">
@@ -34,17 +34,17 @@
         <p class="pActu">Le podcast des cinémas ...</p>
     </div>
 </div>
-<div class="actu actu2">
+<div class="actu">
     <div class="txtActu">
         <h3 class="h3actu">The Creator</h3>
         <p class="pActu">Venez découvrir ce nouveau film à succès dans votre cinéma</p>
     </div>
-    <div class="containterimgactu containerimgactu2">
+    <div class="containerimgactu containerimgactu2">
         <a href="#"><img class="imgactu imgactu2" src="public/img/thecreator.jpg" alt="Salle de cinéma"></a>
     </div>    
 </div>
 <div class="actu actu3">
-    <div class="containerimgactu containterimgactu3">
+    <div class="containerimgactu containerimgactu3">
         <a href="#"><img class="imgactu imgactu3" src="public/img/dune.jpg" alt="Salle de cinéma"></a>
     </div>    
     <div class="txtActu">

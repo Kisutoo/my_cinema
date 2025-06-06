@@ -32,7 +32,13 @@
             </div> 
         </main>
         <footer>
-            
+            <div class="reseaux">
+                <a class="logoreseau" href="#"><img src="public/img/logofb.svg" alt="logo facebook"></a>
+                <a class="logoreseau" href="#"><img src="public/img/logox.svg" alt="logo twitter"></a>
+                <a class="logoreseau" href="#"><img src="public/img/logoinsta.svg" alt="logo instagram"></a>
+            </div>
+            <small>© 2025 - Tous droits réservés ™</small>
+            <a class="mention" href="#">Mentions légales</a>
         </footer>
     </div>
     <script src="./public/js/script.js"></script>

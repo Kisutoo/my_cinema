@@ -80,6 +80,26 @@ footer{
     background-color: rgb(0, 0, 0);
     transform: translate(0, 100%);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.logoreseau{
+    padding: 0 1em;
+}
+
+.reseaux{
+    width: 100%;
+    padding-bottom: 2em;
+}
+
+.mention{padding: 3em 0;}
+
+.bannerfooter{
+    height: 60em;
+    background: linear-gradient(180deg, rgba(27, 24, 24, 1) 1%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 1) 100%);
 }
 
 .h2main{
@@ -145,7 +165,6 @@ footer{
 }
 .banner{
     height: 50em;
-    background: #1B1818;
     background: linear-gradient(180deg, rgba(27, 24, 24, 1) 1%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 1) 100%);
     z-index: 2;
 }
@@ -161,26 +180,33 @@ footer{
     justify-content: center;
     align-items: center;
 }
+
+.actu3{padding: 0;
+padding-top: 10em;}
 .containerimgactu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50%;
 }
 .imgactu{
     border-radius: 10%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .containerimgactu2{
     width: 50%;
     .imgactu2{
-        width: 100%;
+        width: 90%;
     }
 }
 .containerimgactu3{
     width: 50%;
     .imgactu3{
-        width: 200%;
+        width: 260%;
+        transform: translate(-30%, 0);
     }
 }
-.actu3{
-}
+
 .txtActu{
     width: 50%;
     text-align: center;

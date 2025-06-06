@@ -3,6 +3,9 @@
         
 <div class="contentfilms">
     <div class="actuellement">
+        <h3 class="titrecontentfilm">Actuellement</h3>
+    </div>
+    <div class="films">
         <?php foreach($requete->fetchAll() as $filmActuels) { ?> 
                 <div class="film">
                     <a class="lienfilm" href="index.php?action=detailFilm&id=<?=$filmActuels["id_film"]?>">
@@ -11,7 +14,7 @@
                     </a>
                 </div>
         <?php } ?>
-    </div>
+    </div> 
 </div>
 
 

@@ -221,20 +221,38 @@ padding-top: 10em;}
     }
 }
 
-.contentfilms{
-    width: 80%;
-    background-color: rgb(51, 51, 94);
-    background: opacity 0.5;
-}
-
 .contenu{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
 
+.contentfilms{
+    width: 80%;
+    background-color: rgba(23, 23, 73, 0.5);
+    border: 5px white solid;
+    border-radius: 90px;
+}
+
+.affichefilm{
+    width: 70%;
+    border-radius: 70px;
+    border: 5px white solid;
+}
+.titrefilm{
+    font-size: 3em;
+    padding-top: 1em;
+}
+
+.film{
+    padding: 0 3em;
+    padding-bottom: 15em;
+    
 }
 
 .actuellement{
-    display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, 42em);
 }

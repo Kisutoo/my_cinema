@@ -1,26 +1,17 @@
 <?php ob_start(); ?>
-
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>TITRE</th>
-            <th>REALISATEUR</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="displayFilms">
         <?php foreach($requete->fetchAll() as $film) { ?>
-        <tr>
-            <td><a href="index.php?action=detailFilm&id=<?=$film["id_film"]?>"><?= $film["titre"] ?></a></td>
-            <td><?= $film["prenom"] ." ". $film["nom"] ?></td>
-
-        </tr>
+            <div class="film">
+                        <a class="lienfilm" href="index.php?action=detailFilm&id=<?=$film["id_film"]?>">
+                            <img class="affichefilm" src="public/img/affiches/<?=$film["affiche"]?>" alt="<?=$film["descAffiche"]?>">
+                            <h3 class="titrefilm"><?=$film["titre"]?></h3>
+                        </a>
+                    </div>
         <?php } ?>
-    </tbody>
-</table>
-
+</div>
 <?php
-$titre = $film["titre"];
-$titre_secondaire = $film["titre"];
+$titre = $film["nomGenre"];
+$titre_secondaire = $film["nomGenre"];
 $contenu = ob_get_clean();
 require "view/template.php";
 ?>

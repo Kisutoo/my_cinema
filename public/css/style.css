@@ -19,7 +19,10 @@ nav{
     width: 2%;
 }
 body{
+    max-width: 100%;
     background-image: url(../img/6484259.jpg);
+    height: auto;
+    background-attachment: fixed;
 
 }
 
@@ -221,7 +224,7 @@ footer{
         font-size: 6em;
     }
     .pActu{
-        font-size: m;
+        font-size: 4em;
         text-align: center;
         padding : 0 4em;
         padding-top: 1.5em;
@@ -238,7 +241,7 @@ footer{
 
 .contentfilms{
     width: 80%;
-    background-color: rgba(23, 23, 73, 0.5);
+    background-color: rgba(23, 23, 73, 0.3);
     border: 5px white solid;
     border-radius: 90px;
     margin-top: 8em;
@@ -263,6 +266,7 @@ footer{
 .films{
       display: grid;
       grid-template-columns: repeat(3, 42em);
+      justify-content: center;
       
 }
 
@@ -332,5 +336,25 @@ li{
     padding-left: 5em;
     list-style-type: none;
     transform: translate(0%, -95%);
+}
+
+.listActeurs{
+    padding-top: 2em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.acteur{
+    margin-bottom: 0.5em;
+    font-size: 2em;
+}
+
+
+.displayFilms{
+    display: grid;
+    grid-template-columns: repeat(4, 30em);
+    justify-content: center;
+    text-align: center;
 }
 

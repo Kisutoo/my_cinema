@@ -28,6 +28,7 @@ class CinemaController {
             SELECT a.id_acteur, CONCAT(p.prenom, ' ', p.nom) as Actor
             FROM personne p
             INNER JOIN acteur a ON a.id_personne = p.id_personne
+            ORDER BY p.nom ASC
         ");
 
         require "view/listActors.php";
@@ -90,7 +91,7 @@ class CinemaController {
     public function detailGenre($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT f.titre, p.nom, p.prenom, f.id_film
+            SELECT f.titre, p.nom, p.prenom, f.id_film, g.nomGenre, f.affiche, f.descAffiche
             FROM film f
             INNER JOIN associer ass ON f.id_film = ass.id_film
             INNER JOIN genre g ON g.id_genre = ass.id_genre

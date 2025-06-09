@@ -29,7 +29,12 @@ main{
 
 a{
     text-decoration: none;
-    color: white;
+    color: rgb(255, 255, 255);
+    transition: ease-in-out 0.5s;
+}
+
+a:hover{
+    color: #665bce;
 }
 .nav1{
     display: flex;
@@ -181,8 +186,10 @@ footer{
     align-items: center;
 }
 
-.actu3{padding: 0;
-padding-top: 10em;}
+.actu3{
+    padding: 0;
+    padding-top: 10em;
+}
 .containerimgactu{
     display: flex;
     justify-content: center;
@@ -221,7 +228,7 @@ padding-top: 10em;}
     }
 }
 
-.contenu{
+.test{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -256,6 +263,7 @@ padding-top: 10em;}
 .films{
       display: grid;
       grid-template-columns: repeat(3, 42em);
+      
 }
 
 .titrecontentfilm{
@@ -267,3 +275,62 @@ padding-top: 10em;}
     border-bottom: 5px white solid;
     margin-bottom: 8em;
 }
+
+.prochainement{
+    border-top: 2.5px white solid;
+    margin-bottom: 4em;
+}
+
+.afficheinfo{
+    display: flex;
+    padding-bottom: 15em;
+    justify-content: space-between;
+}
+
+.infofilm{
+    width: 50%;
+    padding-top: 10em;
+}
+
+.detAfficheFilm{
+    width: 50%;
+}
+
+.synopsis{
+    text-align: center;
+    font-size: 2em;
+    .titresynopsis{
+        font-size: 2em;
+        padding-bottom: 1em;
+    }
+}
+
+.imgaffichefilm{
+    display: flex;
+    width: 70%;
+    border-radius: 50px;
+    border: 5px white solid;
+    margin-left: 10em;
+}
+
+.txtinfofilm{
+    font-size: 2em;
+    padding-bottom: 2em;
+}
+
+.pageFilm{
+    padding-top: 6em;
+}
+
+.bandeannonce{
+    padding-top: 10em;
+    display: flex;
+    justify-content: center;
+}
+
+li{
+    padding-left: 5em;
+    list-style-type: none;
+    transform: translate(0%, -95%);
+}
+

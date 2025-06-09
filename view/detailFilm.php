@@ -1,38 +1,34 @@
 <?php ob_start(); ?>
 <?php 
+date_default_timezone_set('CET');
 $film = $requete->fetch();
+$genre = $requete2->fetch();
 ?>
-
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>TITRE</th>
-            <th>DUREE</th>
-            <th>ANNEE SORTIE</th>
-            <th>REALISATEUR</th>
-            <th>NOTE</th>
-            <th>SYSNOPSIS</th>
-            <th>CASTING</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><?= $film["titre"] ?></td>
-            <td><?= $film["duree"] ?></td>
-            <td><?= $film["anneeDeSortie"] ?></td>
-            <td><?= $film["nom"] ?></td>
-            <td><?= $film["note"] ?></td>
-            <td><?= $film["synopsis"] ?></td>
-            <td>
-                <?php foreach($requete1->fetchAll() as $cast) { ?>
-                    <div>
-                        <a href="index.php?action=detailActor&id=<?=$cast["id_acteur"]?>"><?= $cast["Acteur"]?></a>
-                    </div>
+<div class="pageFilm">
+    <div class="afficheinfo">
+        <div class="detAfficheFilm">
+            <img class="imgaffichefilm" src="public/img/affiches/<?=$film["affiche"]?>" alt="<?=$film["descAffiche"]?>">
+        </div>
+        <div class="infofilm">
+            <p class=txtinfofilm><b>Genre :</b> <?=$genre["nomGenre"]?></p>
+            <p class=txtinfofilm><b>Durée :</b> <?=$film["duree"]?> minutes</p>
+            <p class=txtinfofilm><b>Date de sortie :</b> <?=(new DateTime($film["anneeDeSortie"]))->format('d M Y')?></p>
+            <p class=txtinfofilm><b>Réalisateur :</b> <?=$film["prenom"] . " " . $film["nom"]?></p>
+            <p class=txtinfofilm><b>Note :</b> <?=$film["note"]?> / 10</p>
+            <ul class=txtinfofilm><b>Acteurs :</b> <?php foreach($requete1->fetchAll() as $cast) { ?>
+                        <li><a href="index.php?action=detailActor&id=<?=$cast["id_acteur"]?>"><?= $cast["Acteur"]?></a></li>
                 <?php } ?>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                </ul>
+        </div>
+    </div>
+    <div class="synopsis">
+        <p class=titresynopsis>Résumé</p>
+        <p><?=$film["synopsis"]?></p>
+    </div>
+    <div class="bandeannonce">
+        <?=$film["bandeAnnonce"]?>
+    </div>
+</div>
 
 <?php
 $titre = $film["titre"];

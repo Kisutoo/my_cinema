@@ -9,10 +9,16 @@ class CinemaController {
 
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT id_film, titre, affiche, descAffiche
+            SELECT id_film, titre, affiche, descAffiche, anneeDeSortie
             FROM film
+            WHERE anneeDeSortie <= CURDATE()
         ");
-    
+
+        $requete1 = $pdo->query("
+            SELECT id_film, titre, affiche, descAffiche, anneeDeSortie
+            FROM film
+            WHERE anneeDeSortie > CURDATE()
+        ");
         require "./view/listFilms.php";
     }
 
@@ -42,7 +48,7 @@ class CinemaController {
     public function detailFilm($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT f.titre, f.duree, f.anneeDeSortie, p.nom, p.prenom, f.note, f.synopsis
+            SELECT f.titre, f.duree, f.anneeDeSortie, p.nom, p.prenom, f.note, f.synopsis, f.affiche, f.descAffiche, f.bandeAnnonce
             FROM film f
             INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
             INNER JOIN personne p ON p.id_personne = r.id_personne
@@ -57,8 +63,17 @@ class CinemaController {
             INNER JOIN film f ON f.id_film = i.id_film
             WHERE f.id_film = :id_film
         ");
+
+        $requete2 = $pdo->prepare("
+            SELECT g.nomGenre
+            FROM genre g
+            INNER JOIN associer ass ON ass.id_genre = g.id_genre
+            INNER JOIN film f ON f.id_film = ass.id_film
+            WHERE f.id_film = :id_film
+        ");
         $requete->execute(["id_film" => $id]);
         $requete1->execute(["id_film" => $id]);
+        $requete2->execute(["id_film" => $id]);
         require "view/detailFilm.php";
     }
 

@@ -23,7 +23,7 @@ class CinemaController {
     }
 
     public function listActors() {
-        $pdo = Connect::seConnecter();
+        $pdo = Connect::seConnecter();  // Utilise la fonction seConnecter pour se connecter à la base de donnée
         $requete = $pdo->query("
             SELECT a.id_acteur, CONCAT(p.prenom, ' ', p.nom) as Actor
             FROM personne p
@@ -91,15 +91,21 @@ class CinemaController {
     public function detailGenre($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT f.titre, p.nom, p.prenom, f.id_film, g.nomGenre, f.affiche, f.descAffiche
+            SELECT f.titre, p.nom, p.prenom, f.id_film, g.nomGenre, f.affiche, f.descAffiche, g.id_genre
             FROM film f
             INNER JOIN associer ass ON f.id_film = ass.id_film
             INNER JOIN genre g ON g.id_genre = ass.id_genre
             INNER JOIN realisateur r ON r.id_realisateur = f.id_realisateur
             INNER JOIN personne p ON r.id_personne = p.id_personne
-            WHERE ass.id_genre = :id_genre
+            WHERE g.id_genre = :id_genre
+        ");
+        $requete1 = $pdo->prepare("
+            SELECT *
+            FROM genre
+            WHERE id_genre = :id_genre
         ");
         $requete->execute(["id_genre" => $id]);
+        $requete1->execute(["id_genre" => $id]);
         require "view/detailGenre.php";
     }
 
@@ -130,5 +136,64 @@ class CinemaController {
     public function main() {
     
         require "view/main.php";
+    }
+
+    public function addFilmForm($id) {
+        // select realisateurs
+        // select genres 
+        require "view/addFilmForm.php";
+    }
+    
+    public function addFilm($id) {
+        if(isset($_POST['submit']))
+            {
+                $affiche = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $titre = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
+                $anneeDeSortie = filter_input(INPUT_POST, "anneeDeSortie");
+                $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $note = filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
+                $descAffiche = filter_input(INPUT_POST, "descAffiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $bandeAnnonce = filter_input(INPUT_POST, "bandeAnnonce", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                
+            }
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+            INSERT INTO film ('affiche', 'titre', 'duree', 'anneeDeSortie', 'synopsis', 'note', 'descAffiche', 'bandeAnnonce')
+            VALUES (:affiche, :titre, :duree, :anneeDeSortie, :synopsis, :note, :descAffiche, :bandeAnnonce);
+        ");
+        $requete->execute(["affiche" => $affiche, "titre" => $titre, "duree" => $duree, "anneeDeSortie" => $anneeDeSortie, "synopsis" => $synopsis, "note" => $note, "descAffiche" => $descAffiche, "bandeAnnonce" => $bandeAnnonce]);
+        require "view/listFilms.php";
+    }
+
+    public function addGenreForm() {
+        require "view/addGenreForm.php";
+    }
+    
+    public function addGenre() {
+        if(isset($_POST['submit']))
+        {
+            $nomGenre = filter_input(INPUT_POST, "nomGenre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        }
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+            INSERT INTO genre (nomGenre)
+            VALUE (:nomGenre)
+            ");
+        $requete->execute(["nomGenre" => $nomGenre]);
+        require "view/addGenreForm.php";
+
+        header("Location:index.php?action=listGenre");
+    }
+
+    public function delGenre($id) {
+        $pdo = Connect::seConnecter();
+        $requete2 = $pdo->prepare("
+            DELETE FROM genre
+            WHERE id_genre = :id_genre
+        ");
+        $requete2->execute(["id_genre" => $id]);
+
+        header("Location:index.php?action=listGenre");
     }
 }

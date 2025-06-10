@@ -28,14 +28,10 @@
                         </a>
                     </div>
             <?php } ?>
-        </div>
-        </div>
-        <div class="films">
-            
+            </div>
         </div>
     </div>
 </div>    
-
 <?php
 $titre = "Films à l'affiche";
 $titre_secondaire = "Films à l'affiche";

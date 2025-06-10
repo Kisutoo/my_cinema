@@ -51,8 +51,20 @@
         </p>
         <p class="pform">
             <label  class="sectionsForm" aria-label="Bande Annonce">
-            Bande annonce <br><br> (intégrer script vidéo youtube)
+            Bande annonce <br>(intégrer script vidéo youtube)
             <input class="inputform" type="text" required="required" name="bandeAnnonce">
+            </label>
+        </p>
+        <p class="pform">
+            <label class="sectionForm" aria-label="Réalisateur">
+            Réalisateur
+            <input class="inputform" type="select" required="required" name=id_realisateur>
+            <nom>id_realisateur</nom>
+                <?php foreach($requete->fetchAll() as $real) { ?>
+                    
+                    <option valeur="<?=$real["id_realisateur"]?>"><?=$real["Réal"]?></option>
+                <?php } ?>
+            </input>
             </label>
         </p>
     </div>

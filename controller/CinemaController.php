@@ -140,15 +140,21 @@ class CinemaController {
 
     public function addFilmForm($id) {
         // select realisateurs
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("
+            SELECT CONCAT(p.prenom, ' ', p.nom) AS Réal, r.id_realisateur
+            FROM personne p
+            INNER JOIN realisateur r ON p.id_personne = r.id_personne 
+        ");
         // select genres 
         require "view/addFilmForm.php";
     }
     
-    public function addFilm($id) {
+    public function addFilm() {
         if(isset($_POST['submit']))
             {
                 $affiche = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $titre = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
                 $anneeDeSortie = filter_input(INPUT_POST, "anneeDeSortie");
                 $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);

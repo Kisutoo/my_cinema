@@ -29,6 +29,10 @@ $genre = $requete2->fetch();
         <?=$film["bandeAnnonce"]?>
     </div>
 </div>
+<div class="button">
+        <a href="index.php?action=delFilm&id=<?=$id?>"><input class="boutonenvoyer delete" type="submit" name="submit" value="Supprimer le film"></a>
+    </div>
+</div>
 
 <?php
 $titre = $film["titre"];

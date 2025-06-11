@@ -138,7 +138,7 @@ class CinemaController {
         require "view/main.php";
     }
 
-    public function addFilmForm($id) {
+    public function addFilmForm() {
         // select realisateurs
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
@@ -146,11 +146,15 @@ class CinemaController {
             FROM personne p
             INNER JOIN realisateur r ON p.id_personne = r.id_personne 
         ");
+        $requete1 = $pdo->query("
+            SELECT g.nomGenre, g.id_genre
+            FROM genre g
+        ");
         // select genres 
         require "view/addFilmForm.php";
     }
     
-    public function addFilm() {
+    public function addFilm($id) {
         if(isset($_POST['submit']))
             {
                 $affiche = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -161,15 +165,22 @@ class CinemaController {
                 $note = filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
                 $descAffiche = filter_input(INPUT_POST, "descAffiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $bandeAnnonce = filter_input(INPUT_POST, "bandeAnnonce", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                
+                $id_realisateur = filter_input(INPUT_POST, "id_realisateur");
+                $id_genre = filter_input(INPUT_POST, "id_genre");
             }
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            INSERT INTO film ('affiche', 'titre', 'duree', 'anneeDeSortie', 'synopsis', 'note', 'descAffiche', 'bandeAnnonce')
-            VALUES (:affiche, :titre, :duree, :anneeDeSortie, :synopsis, :note, :descAffiche, :bandeAnnonce);
+            INSERT INTO film (affiche, titre, duree, anneeDeSortie, synopsis, note, descAffiche, bandeAnnonce, id_realisateur)
+            VALUES (:affiche, :titre, :duree, (STR_TO_DATE(:anneeDeSortie, '%Y-%m-%d')), :synopsis, :note, :descAffiche, :bandeAnnonce, :id_realisateur);
         ");
-        $requete->execute(["affiche" => $affiche, "titre" => $titre, "duree" => $duree, "anneeDeSortie" => $anneeDeSortie, "synopsis" => $synopsis, "note" => $note, "descAffiche" => $descAffiche, "bandeAnnonce" => $bandeAnnonce]);
-        require "view/listFilms.php";
+        // $requete1 = $pdo->prepare("
+        //     INSERT INTO associer (id_genre)
+        //     VALUES (:id_genre)
+        // ");
+        $requete->execute(["affiche" => $affiche, "titre" => $titre, "duree" => $duree, "anneeDeSortie" => $anneeDeSortie, "synopsis" => $synopsis, "note" => $note, "descAffiche" => $descAffiche, "bandeAnnonce" => $bandeAnnonce, "id_realisateur" => $id_realisateur]);
+        // $requete1->execute(["id_genre" => $id]);
+
+        header("Location:index.php?action=listGenre");
     }
 
     public function addGenreForm() {
@@ -201,5 +212,16 @@ class CinemaController {
         $requete2->execute(["id_genre" => $id]);
 
         header("Location:index.php?action=listGenre");
+    }
+
+    public function delFilm($id) {
+        $pdo = Connect::seConnecter();
+        $requete2 = $pdo->prepare("
+            DELETE FROM film
+            WHERE id_film = :id_film
+        ");
+        $requete2->execute(["id_film" => $id]);
+
+        header("Location:index.php?action=listFilms");
     }
 }

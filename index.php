@@ -24,8 +24,9 @@ if(isset($_GET["action"])){
         case "main" : $ctrlCinema->main(); break;
         case "addFilmForm" : $ctrlCinema->addFilmForm($id); break;
         case "addFilm" : $ctrlCinema->addFilm($id); break;
-        case "addGenreForm" : $ctrlCinema->addGenreForm(); break;
+        case "addGenreForm" : $ctrlCinema->addGenreForm($id); break;
         case "addGenre" : $ctrlCinema->addGenre(); break;
         case "delGenre" : $ctrlCinema->delGenre($id); break;
+        case "delFilm" : $ctrlCinema->delFilm($id); break;
     }   
 }

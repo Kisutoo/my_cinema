@@ -173,12 +173,12 @@ class CinemaController {
             INSERT INTO film (affiche, titre, duree, anneeDeSortie, synopsis, note, descAffiche, bandeAnnonce, id_realisateur)
             VALUES (:affiche, :titre, :duree, (STR_TO_DATE(:anneeDeSortie, '%Y-%m-%d')), :synopsis, :note, :descAffiche, :bandeAnnonce, :id_realisateur);
         ");
-        // $requete1 = $pdo->prepare("
-        //     INSERT INTO associer (id_genre)
-        //     VALUES (:id_genre)
-        // ");
+        $requete1 = $pdo->prepare("
+            INSERT INTO associer (id_genre)
+            VALUES (:id_genre)
+        ");
         $requete->execute(["affiche" => $affiche, "titre" => $titre, "duree" => $duree, "anneeDeSortie" => $anneeDeSortie, "synopsis" => $synopsis, "note" => $note, "descAffiche" => $descAffiche, "bandeAnnonce" => $bandeAnnonce, "id_realisateur" => $id_realisateur]);
-        // $requete1->execute(["id_genre" => $id]);
+        $requete1->execute(["id_genre" => $id]);
 
         header("Location:index.php?action=listGenre");
     }

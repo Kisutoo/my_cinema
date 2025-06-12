@@ -1,10 +1,9 @@
 <?php ob_start(); 
-$genrebutton = $requete1->fetch();
-
+$id = $_GET['id'];
 ?>
 
 
-<div class="formulairefilm">
+<div class="formulairefilm" enctype="multipart/form-data">
     <form class="formfilm" action="index.php?action=addFilm" method="post">
     <div class="section1">
         <p class="pform">
@@ -17,7 +16,7 @@ $genrebutton = $requete1->fetch();
             <label class="sectionsForm" aria-label="Affiche du film">
                 Affiche du film (titre.webp)
             </label>
-            <input type="text" class="inputform" required="required" name="affiche">
+            <input type="file" class="inputform" required="required" name="affiche">
         </p> 
         <p class="pform">
             <label class="sectionsForm" aria-label="Description de l'affiche du film">
@@ -72,18 +71,23 @@ $genrebutton = $requete1->fetch();
             </select>
         </p>
         <p class="pform">
-            <label class="sectionForm" aria-label="Genre">
-                Autres genres
-            </label>
-            <?php foreach($requete1->fetchAll() as $genre) { ?>  
-                <input class="inputform" type="checkbox" name=id_genre>
-                <label value="<?=$genre["id_genre"]?>"><?=$genre["nomGenre"]?></label>
-                </input>
-                <?php } ?>
-        </p>
-    </div>
+            <div class="sectionForm">
+                <label class="themeLabel" for="theme" aria-label="Selection genre du film"><br></label>
+                <div class="checkbox-container">
+                    <?php
+                    foreach ($requete1->fetchAll() as $theme) {
+                    ?>
+                        <div class="checkbox-grid">
+                            <input type="checkbox" id="<?= $theme["id_genre"] ?>" name="theme[]" value="<?= $theme["id_genre"] ?> ">
+                            <label for="<?= $theme["id_genre"] ?>" value="<?= $theme["id_genre"] ?>"><?= $theme["nomGenre"] . "<br>" ?></label>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
         <p class="button">
-            <a href="index.php?action=addFilm&id=<?=$genrebutton["id_genre"]?>"><input class="boutonenvoyer" type="submit" name="submit" value="Ajouter le film">
+            <a href="index.php?action=addFilm&id=<?=$id?>"><input class="boutonenvoyer" type="submit" name="submit" value="Ajouter le film">
         </p>
 
     </form>

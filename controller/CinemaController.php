@@ -165,21 +165,29 @@ class CinemaController {
                 $note = filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
                 $descAffiche = filter_input(INPUT_POST, "descAffiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $bandeAnnonce = filter_input(INPUT_POST, "bandeAnnonce", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $id_realisateur = filter_input(INPUT_POST, "id_realisateur");
-                $id_genre = filter_input(INPUT_POST, "id_genre");
+                $id_realisateur = filter_input(INPUT_POST, "id_realisateur", FILTER_VALIDATE_INT);
             }
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
             INSERT INTO film (affiche, titre, duree, anneeDeSortie, synopsis, note, descAffiche, bandeAnnonce, id_realisateur)
             VALUES (:affiche, :titre, :duree, (STR_TO_DATE(:anneeDeSortie, '%Y-%m-%d')), :synopsis, :note, :descAffiche, :bandeAnnonce, :id_realisateur);
         ");
-        $requete1 = $pdo->prepare("
-            INSERT INTO associer (id_genre)
-            VALUES (:id_genre)
-        ");
+        
         $requete->execute(["affiche" => $affiche, "titre" => $titre, "duree" => $duree, "anneeDeSortie" => $anneeDeSortie, "synopsis" => $synopsis, "note" => $note, "descAffiche" => $descAffiche, "bandeAnnonce" => $bandeAnnonce, "id_realisateur" => $id_realisateur]);
-        $requete1->execute(["id_genre" => $id]);
+         
+        $idFilm = $pdo->lastInsertId();
 
+        foreach($_POST["theme"] as $genre)
+        {
+            $genre = filter_var($genre, FILTER_VALIDATE_INT);
+        
+            $requete1 = $pdo->prepare("
+                INSERT INTO associer (id_genre, id_film)
+                VALUES (:id_genre, :id_film)
+            ");
+            $requete1->execute(["id_genre" => $genre, "id_film" => $idFilm]);
+        }
+        require "view/addFilmForm.php";
         header("Location:index.php?action=listGenre");
     }
 

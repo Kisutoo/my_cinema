@@ -10,6 +10,7 @@ $ctrlCinema = new CinemaController();
 $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET["action"])){
+// Dans le cas ou "action" existe dans la superglobale _GET, donc si action existe dans l'url
     switch ($_GET["action"]) {
 
         default : $ctrlCinema->main(); break;

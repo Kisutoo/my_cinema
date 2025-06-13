@@ -20,6 +20,7 @@ class CinemaController {
             WHERE anneeDeSortie > CURDATE()
         ");
         require "./view/listFilms.php";
+        // On appelle la vue ListFilms
     }
 
     public function listActors() {
@@ -42,7 +43,9 @@ class CinemaController {
             INNER JOIN acteur a ON a.id_personne = p.id_personne
             WHERE a.id_acteur = :id_acteur
         ");
+        // On "prepare" la requete pour l'utiliser en guise de "moule"
         $requete->execute(["id_acteur" => $id]);
+        // puis on l'execute avec les variables souhaitées
         require "view/detailActor.php";
     }
 
@@ -156,6 +159,7 @@ class CinemaController {
     
     public function addFilm($id) {
         if(isset($_POST['submit']))
+        // Si le tableau _POST['submit'] existe
             {
                 $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
@@ -165,27 +169,39 @@ class CinemaController {
                 $descAffiche = filter_input(INPUT_POST, "descAffiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $bandeAnnonce = filter_input(INPUT_POST, "bandeAnnonce", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $id_realisateur = filter_input(INPUT_POST, "id_realisateur", FILTER_VALIDATE_INT);
+                // On assainit toutes les variables que l'on rentrera en base de donnée et réutilisera plus tard dans le code
             }
         if(isset($_FILES['affiche']))
+        // Si le tableau _FILES['affiche'] existe
             {
                 $affiche = $_FILES['affiche']['name'];
                 $tmpName = $_FILES['affiche']['tmp_name'];
                 $size = $_FILES['affiche']['size'];
                 $error = $_FILES['affiche']['error'];
+                // Assignation de différentes variables en fonction des données contenues dans la superglobale _FILES
 
                 $extensions = ['webp'];
                 $tabExtension = explode('.', $affiche);
+                // On sépare le nom de l'affiche en plusieurs partie en fonction dès que l'on tombe sur le caractère rentré en paramètres, donc le "."
                 $extension = strtolower(end($tabExtension));
+                // On met en minuscule le nom de l'extension pour pouvoir la comparer à l'extension du dessus, plus tard
 
                 if(in_array($extension, $extensions))
+                // Si le fichier séléctionné est un fichier webp
                 {
-                    filter_var("affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                    move_uploaded_file($tmpName, './public/img/affiches/'.$affiche);
+                    $uniqueName = uniqid('', true);
+                    //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
+                    $IdAffiche = $uniqueName . "." . $extension;
+                    //$affiche = 5f586bf96dcd38.73540086.jpg 
+                    move_uploaded_file($tmpName, './public/img/affiches/'.$IdAffiche);
+                    //Déplace le fichier contenu dans le tableau file, au dossier public/img/affiche
                 }
                 else
+                // Si le fichier séléctionné n'est pas un ficher webp
                 {
                     echo "Veuillez séléctionner un fichier webp";
                     die;
+                    // Arrête la fonction
                 }
             }
 
@@ -195,7 +211,7 @@ class CinemaController {
             VALUES (:affiche, :titre, :duree, (STR_TO_DATE(:anneeDeSortie, '%Y-%m-%d')), :synopsis, :note, :descAffiche, :bandeAnnonce, :id_realisateur);
         ");
         
-        $requete->execute(["affiche" => $affiche, "titre" => $titre, "duree" => $duree, "anneeDeSortie" => $anneeDeSortie, "synopsis" => $synopsis, "note" => $note, "descAffiche" => $descAffiche, "bandeAnnonce" => $bandeAnnonce, "id_realisateur" => $id_realisateur]);
+        $requete->execute(["affiche" => $IdAffiche, "titre" => $titre, "duree" => $duree, "anneeDeSortie" => $anneeDeSortie, "synopsis" => $synopsis, "note" => $note, "descAffiche" => $descAffiche, "bandeAnnonce" => $bandeAnnonce, "id_realisateur" => $id_realisateur]);
          
         $idFilm = $pdo->lastInsertId();
 

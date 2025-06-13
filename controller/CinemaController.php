@@ -157,7 +157,6 @@ class CinemaController {
     public function addFilm($id) {
         if(isset($_POST['submit']))
             {
-                $affiche = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
                 $anneeDeSortie = filter_input(INPUT_POST, "anneeDeSortie");
@@ -167,6 +166,29 @@ class CinemaController {
                 $bandeAnnonce = filter_input(INPUT_POST, "bandeAnnonce", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $id_realisateur = filter_input(INPUT_POST, "id_realisateur", FILTER_VALIDATE_INT);
             }
+        if(isset($_FILES['affiche']))
+            {
+                $affiche = $_FILES['affiche']['name'];
+                $tmpName = $_FILES['affiche']['tmp_name'];
+                $size = $_FILES['affiche']['size'];
+                $error = $_FILES['affiche']['error'];
+
+                $extensions = ['webp'];
+                $tabExtension = explode('.', $affiche);
+                $extension = strtolower(end($tabExtension));
+
+                if(in_array($extension, $extensions))
+                {
+                    filter_var("affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    move_uploaded_file($tmpName, './public/img/affiches/'.$affiche);
+                }
+                else
+                {
+                    echo "Veuillez séléctionner un fichier webp";
+                    die;
+                }
+            }
+
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
             INSERT INTO film (affiche, titre, duree, anneeDeSortie, synopsis, note, descAffiche, bandeAnnonce, id_realisateur)
@@ -187,8 +209,7 @@ class CinemaController {
             ");
             $requete1->execute(["id_genre" => $genre, "id_film" => $idFilm]);
         }
-        require "view/addFilmForm.php";
-        header("Location:index.php?action=listGenre");
+        header("Location:index.php?action=listFilms");
     }
 
     public function addGenreForm() {
@@ -206,8 +227,6 @@ class CinemaController {
             VALUE (:nomGenre)
             ");
         $requete->execute(["nomGenre" => $nomGenre]);
-        require "view/addGenreForm.php";
-
         header("Location:index.php?action=listGenre");
     }
 

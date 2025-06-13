@@ -3,8 +3,8 @@ $id = $_GET['id'];
 ?>
 
 
-<div class="formulairefilm" enctype="multipart/form-data">
-    <form class="formfilm" action="index.php?action=addFilm" method="post">
+<div class="formulairefilm">
+    <form class="formfilm" action="index.php?action=addFilm" method="post" enctype="multipart/form-data">
     <div class="section1">
         <p class="pform">
             <label class="sectionsForm" aria-label="Titre du film">
@@ -14,7 +14,7 @@ $id = $_GET['id'];
         </p>
         <p class="pform">
             <label class="sectionsForm" aria-label="Affiche du film">
-                Affiche du film (titre.webp)
+                Affiche du film (.webp)
             </label>
             <input type="file" class="inputform" required="required" name="affiche">
         </p> 
@@ -70,10 +70,11 @@ $id = $_GET['id'];
                 <?php } ?>
             </select>
         </p>
+        
         <p class="pform">
             <div class="sectionForm">
                 <label class="themeLabel" for="theme" aria-label="Selection genre du film"><br></label>
-                <div class="checkbox-container">
+                <div class="section1checkbox">
                     <?php
                     foreach ($requete1->fetchAll() as $theme) {
                     ?>
@@ -86,6 +87,7 @@ $id = $_GET['id'];
                     ?>
                 </div>
             </div>
+        </p>
         <p class="button">
             <a href="index.php?action=addFilm&id=<?=$id?>"><input class="boutonenvoyer" type="submit" name="submit" value="Ajouter le film">
         </p>
